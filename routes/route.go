@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/IshanXXIV/GetGroundTask/models/controllers"
+	"github.com/IshanXXIV/GetGroundTask/controllers"
 	"github.com/go-siris/siris/core/router"
 )
 

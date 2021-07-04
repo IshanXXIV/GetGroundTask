@@ -4,12 +4,12 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/IshanXXIV/GetGroundTask/models/requests"
+	"github.com/IshanXXIV/GetGroundTask/requests"
 
 	"github.com/gin-gonic/gin"
 )
 
-func addGuest(c *gin.Context) {
+func AddGuest(c *gin.Context) {
 	_ctx, _ := c.Get("context")
 	_ = _ctx.(context.Context)
 
