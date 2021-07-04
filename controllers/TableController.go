@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"gitlab.com/getGround/GetGroundTableBooking/models/requests"
+	"github.com/IshanXXIV/GetGroundTask/models/requests"
 
 	"github.com/gin-gonic/gin"
 )

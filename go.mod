@@ -1,5 +1,3 @@
-module gitlab.com/getGround/GetGroundTableBooking
-
-require ()
+module GetGroundTask
 
 go 1.16

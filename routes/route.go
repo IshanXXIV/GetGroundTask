@@ -1,8 +1,8 @@
 package routes
 
 import (
+	"github.com/IshanXXIV/GetGroundTask/models/controllers"
 	"github.com/go-siris/siris/core/router"
-	"gitlab.com/getGround/GetGroundTableBooking/models/controllers"
 )
 
 //endpoints to make all adjustments in the tables accoding to the guests

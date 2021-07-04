@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gitlab.com/getGround/GetGroundTableBooking/routes"
+	"github.com/IshanXXIV/GetGroundTask/routes"
 
 	"github.com/gin-gonic/gin"
 )
