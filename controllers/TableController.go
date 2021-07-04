@@ -1,47 +1,78 @@
 package controllers
 
 import (
-	"context"
 	"net/http"
 
-	"github.com/IshanXXIV/GetGroundTask/requests"
+	"GetGroundTask/requests"
+	"GetGroundTask/service"
 
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo"
 )
 
-func AddGuest(c *gin.Context) {
-	_ctx, _ := c.Get("context")
-	_ = _ctx.(context.Context)
-
+func AddGuest(c echo.Context) error {
 	req := requests.AddGuestRequest{}
 
-	err := c.BindJSON(req)
-
-	print(req)
-	if err != nil {
-		// apiErr := &utils.ApplicationError{
-		// 	Message:    "Enter proper request body",
-		// 	StatusCode: http.StatusBadRequest,
-		// 	Code:       "bad_request",
-		// }
-
-		c.JSON(http.StatusBadRequest, "")
-		return
+	if err := c.Bind(req); err != nil {
+		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	// name, err := strconv.ParseInt(c.Param("name"), 10, 64)
+	name := c.Param("name")
+
+	errService := service.AddGuest(req, name)
+
+	if errService != nil {
+		return c.JSON(http.StatusBadRequest, errService)
+	}
+	return c.JSON(http.StatusOK, "Guest List Successfully Updated")
+}
+
+func GetGuests(c echo.Context) error {
+	guestList, err := service.GetGuests()
 
 	if err != nil {
-		// apiErr := &utils.ApplicationError{
-		// 	Message:    "Enter proper guest name",
-		// 	StatusCode: http.StatusBadRequest,
-		// 	Code:       "bad_request",
-		// }
-
-		c.JSON(http.StatusBadRequest, "")
-		return
+		return c.JSON(http.StatusBadRequest, err)
 	}
-	return
+	return c.JSON(http.StatusOK, guestList)
+}
 
-	// c.JSON(http.StatusOK, response.Success(ctx, url, key, request))
+func AddGuestsArrivals(c echo.Context) error {
+	req := requests.ArriveGuestRequest{}
+
+	if err := c.Bind(req); err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	name := c.Param("name")
+
+	errService := service.AddGuestsArrivals(req, name)
+
+	if errService != nil {
+		return c.JSON(http.StatusBadRequest, errService)
+	}
+	return c.JSON(http.StatusOK, "Guest List Successfully Updated")
+}
+
+func GetGuestCurrent(c echo.Context) error {
+	guestList, err := service.GetGuests()
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+	return c.JSON(http.StatusOK, guestList)
+}
+
+func GetEmptySeats(c echo.Context) error {
+	seats, err := service.GetEmptySeats()
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+	return c.JSON(http.StatusOK, seats)
+}
+
+func DeleteGuest(c echo.Context) error {
+	name := c.Param("name")
+	err := service.DeleteGuest(name)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+	return c.JSON(http.StatusOK, "Guest successfully deleted")
 }

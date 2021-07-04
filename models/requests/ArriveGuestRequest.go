@@ -1,6 +1,5 @@
 package requests
 
-type AddGuestRequest struct {
-	TableId            int64 `json:"table"`
+type ArriveGuestRequest struct {
 	AccompanyingGuests int64 `json:"accompanying_guests"`
 }

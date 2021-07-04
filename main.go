@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/IshanXXIV/GetGroundTask/routes"
+	"GetGroundTask/models"
+	"GetGroundTask/routes"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,8 +16,10 @@ func main() {
 		})
 	})
 
+	models.ConnectDB()
+
 	router := gin.Default()
-	routes.MapUrls(router)
+	routes.MapUrls()
 	err := router.Run(":8080")
 
 	panic(err)

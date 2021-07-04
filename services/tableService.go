@@ -1,93 +1,56 @@
 package service
 
 import (
-	"net/http"
-	"strconv"
+	"GetGroundTask/models"
+	"GetGroundTask/requests"
 )
 
-func addGuest(c *gin.Context) {
-	name, err := strconv.ParseInt(c.Param("name"), 10, 64)
+func AddGuests(request requests.AddGuestRequest, name string) error {
+	err := models.UpdateTable(request.TableId, request.AccompanyingGuests, name)
 	if err != nil {
-		apiErr := &utils.ApplicationError{
-			Message:    "Enter proper guest name",
-			StatusCode: http.StatusBadRequest,
-			Code:       "bad_request",
-		}
-
-		utils.RespondError(c, apiErr)
-		return
+		return err
 	}
-
+	return nil
 }
 
-func getGuestList(c *gin.Context) {
-	userID, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
+func GetGuests() (*[]models.TableInfo, error) {
+	tablesInfo := []models.TableInfo{}
+	err := models.GetGuests(&tablesInfo)
 	if err != nil {
-		apiErr := &utils.ApplicationError{
-			Message:    "user_id must be a number",
-			StatusCode: http.StatusBadRequest,
-			Code:       "bad_request",
-		}
-
-		utils.RespondError(c, apiErr)
-
-		return
+		return nil, err
 	}
-
-	user, apiErr := services.UsersService.GetUser(userID)
-
-	if apiErr != nil {
-		utils.RespondError(c, apiErr)
-		return
-	}
-
-	utils.Respond(c, http.StatusOK, user)
+	return tablesInfo, nil
 }
 
-func editGuestList(c *gin.Context) {
-	userID, err := strconv.ParseInt(c.Param("name"), 10, 64)
+func AddGuestsArrivals(request requests.AddGuestRequest, name string) error {
+	err := models.UpdateTableArrival(request.TableId, request.AccompanyingGuests, name)
 	if err != nil {
-		apiErr := &utils.ApplicationError{
-			Message:    "Enter proper guest name",
-			StatusCode: http.StatusBadRequest,
-			Code:       "bad_request",
-		}
-
-		utils.RespondError(c, apiErr)
-
-		return
+		return err
 	}
-
-	user, apiErr := services.UsersService.GetUser(userID)
-
-	if apiErr != nil {
-		utils.RespondError(c, apiErr)
-		return
-	}
-
-	utils.Respond(c, http.StatusOK, user)
+	return nil
 }
 
-func deleteGuests(c *gin.Context) {
-	userID, err := strconv.ParseInt(c.Param("name"), 10, 64)
+func GetGuestCurrent() (*[]models.GuestInfo, error) {
+	guestInfo := []models.GuestInfo{}
+	err := models.GetGuests(&guestInfo)
 	if err != nil {
-		apiErr := &utils.ApplicationError{
-			Message:    "Enter proper guest name",
-			StatusCode: http.StatusBadRequest,
-			Code:       "bad_request",
-		}
-
-		utils.RespondError(c, apiErr)
-
-		return
+		return nil, err
 	}
+	return guestInfo, nil
+}
 
-	user, apiErr := services.UsersService.GetUser(userID)
-
-	if apiErr != nil {
-		utils.RespondError(c, apiErr)
-		return
+func GetEmptySeats() (int64, error) {
+	seats, err := models.GetEmptySeats()
+	if err != nil {
+		return 0, err
 	}
+	return seats, nil
+}
 
-	utils.Respond(c, http.StatusOK, user)
+func DeleteGuest(name string) error {
+	err := models.DeleteGuest()
+	if err != nil {
+		return err
+	}
+	return nil
 }
