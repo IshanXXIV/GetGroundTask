@@ -25,5 +25,3 @@ func main() {
 	panic(err)
 
 }
-
-github.com/IshanXXIV/GetGroundTask
