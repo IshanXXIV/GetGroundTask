@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"GetGroundTask/controllers"
+	"github.com/IshanXXIV/GetGroundTask/controllers"
 
 	"github.com/labstack/echo"
 )

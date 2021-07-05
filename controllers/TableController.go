@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
-	"GetGroundTask/requests"
-	"GetGroundTask/service"
+	"github.com/IshanXXIV/GetGroundTask/requests"
+	"github.com/IshanXXIV/GetGroundTask/service"
 
 	"github.com/labstack/echo"
 )

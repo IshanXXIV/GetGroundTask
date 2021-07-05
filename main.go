@@ -1,8 +1,8 @@
 package main
 
 import (
-	"GetGroundTask/models"
-	"GetGroundTask/routes"
+	"github.com/IshanXXIV/GetGroundTask/models"
+	"github.com/IshanXXIV/GetGroundTask/routes"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,3 +25,5 @@ func main() {
 	panic(err)
 
 }
+
+github.com/IshanXXIV/GetGroundTask

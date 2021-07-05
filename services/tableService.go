@@ -1,8 +1,8 @@
 package service
 
 import (
-	"GetGroundTask/models"
-	"GetGroundTask/requests"
+	"github.com/IshanXXIV/GetGroundTask/models"
+	"github.com/IshanXXIV/GetGroundTask/requests"
 )
 
 func AddGuests(request requests.AddGuestRequest, name string) error {
